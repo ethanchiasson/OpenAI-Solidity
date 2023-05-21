@@ -6,7 +6,7 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import ReactCodeMirror from "@uiw/react-codemirror";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import { solidity } from "@replit/codemirror-lang-solidity";
-import Tabs from "./Tab";
+
 
 const Chatbox: React.FC = () => {
   const { data: sessionData } = useSession();
