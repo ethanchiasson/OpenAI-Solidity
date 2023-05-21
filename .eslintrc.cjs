@@ -19,8 +19,10 @@ const config = {
     project: path.join(__dirname, "tsconfig.json"),
   },
   plugins: ["@typescript-eslint"],
-  extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "next"],
   rules: {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
       {

@@ -21,8 +21,8 @@ const config = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  esLint: {
-    ignoreDuringBuilds: true,
-  }
+    eslint: {
+      ignoreDuringBuilds: true,
+    },
 };
 export default config;

@@ -165,7 +165,7 @@ const Chatbox: React.FC = () => {
             <label className="input-group">
               <input
                 type="number"
-                placeholder={userAllowance.toString()}
+                placeholder={"" + userAllowance}
                 // value={userAllowance}
                 className="input-bordered input"
                 onChange={(e) => setAllowanceInput(Number(e.target.value))}

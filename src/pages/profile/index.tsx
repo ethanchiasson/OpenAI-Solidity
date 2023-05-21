@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { getSession, signIn, signOut, useSession } from "next-auth/react";
+import { GetSessionParams, getSession, signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import Image from "next/image";
 import { api } from "~/utils/api";
@@ -55,7 +55,7 @@ const Profile: NextPage = () => {
   );
 };
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: GetSessionParams) {
   const session = await getSession(context);
 
   if (!session) {
