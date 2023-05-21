@@ -68,9 +68,8 @@ const Chatbox: React.FC = () => {
   return (
     <div className="mt-7 w-full">
       <div className="tabs tabs-boxed p-2">
-        {tabs.map((tab: Tab, i) => (
+        {tabs.map((tab: Tab) => (
           <a
-          key={i}
             className={`tab ${
               activeTab?.title === tab.title ? "tab-active" : ""
             }`}
