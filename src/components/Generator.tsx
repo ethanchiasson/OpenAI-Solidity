@@ -68,8 +68,9 @@ const Chatbox: React.FC = () => {
   return (
     <div className="mt-7 w-full">
       <div className="tabs tabs-boxed p-2">
-        {tabs.map((tab: Tab) => (
+        {tabs.map((tab: Tab, i) => (
           <a
+          key={i}
             className={`tab ${
               activeTab?.title === tab.title ? "tab-active" : ""
             }`}
@@ -164,7 +165,7 @@ const Chatbox: React.FC = () => {
             <label className="input-group">
               <input
                 type="number"
-                placeholder={"" + userAllowance}
+                placeholder={userAllowance.toString()}
                 // value={userAllowance}
                 className="input-bordered input"
                 onChange={(e) => setAllowanceInput(Number(e.target.value))}

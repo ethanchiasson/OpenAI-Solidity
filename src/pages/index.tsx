@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>SolidityChat 💬 </title>
+        <title>SolidityChat</title>
         <meta name="description" content="Build Stronger Smart Contracts" />
         <link rel="icon" href="" />
       </Head>

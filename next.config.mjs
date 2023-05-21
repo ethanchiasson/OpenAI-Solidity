@@ -22,7 +22,7 @@ const config = {
     ignoreBuildErrors: true,
   },
   esLint: {
-    ignoreBuildErrors: true,
+    ignoreDuringBuilds: true,
   }
 };
 export default config;

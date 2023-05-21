@@ -32,8 +32,8 @@ const Dashboard = () => {
 
   return (
     <div className="mt-10 grid gap-3 md:grid-rows-2 lg:grid-cols-2">
-      {cards.map((card) => (
-        <Link href={card.link}>
+      {cards.map((card,i) => (
+        <Link key={i} href={card.link}>
             <div className="card m-2 w-96 rounded-md bg-base-300 shadow-xl">
           <p className="relative left-8 top-5 text-3xl">{card.emoji}</p>
           <div className="card-body">
