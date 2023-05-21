@@ -55,20 +55,21 @@ const Profile: NextPage = () => {
   );
 };
 
-export async function getServerSideProps(context: GetSessionParams) {
-  const session = await getSession(context);
+// export async function getServerSideProps(context: GetSessionParams) {
+//   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: true,
-      },
-    };
-  }
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: true,
+//       },
+//     };
+//   }
 
-  return {
-    props: { session },
-  };
-}
+//   return {
+//     props: { session },
+//   };
+// }
+
 export default Profile;
