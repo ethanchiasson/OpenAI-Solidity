@@ -1,7 +1,5 @@
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
-const GITHUB_BASE_URL = "https://api.github.com/";
-
 export const userRouter = createTRPCRouter({
 
   getCredits: protectedProcedure.query(async ({ ctx }) => {

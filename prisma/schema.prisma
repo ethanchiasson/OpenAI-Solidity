@@ -67,7 +67,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
-    credits       Int       @default(3)
+    credits       Int       @default(100)
 }
 
 

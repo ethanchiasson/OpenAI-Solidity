@@ -1,7 +1,6 @@
 import { createTRPCRouter } from "~/server/api/trpc";
 import { exampleRouter } from "~/server/api/routers/example";
 import {userRouter} from "~/server/api/routers/user"
-import {githubRouter} from "~/server/api/routers/github"
 import { auditRouter } from "~/server/api/routers/audit";
 import { checkoutRouter } from "./routers/checkout";
 /**
@@ -12,7 +11,6 @@ import { checkoutRouter } from "./routers/checkout";
 export const appRouter = createTRPCRouter({
   example: exampleRouter,
   user: userRouter,
-  github: githubRouter,
   audit: auditRouter,
   checkout: checkoutRouter
 });
