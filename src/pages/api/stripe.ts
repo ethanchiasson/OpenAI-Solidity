@@ -43,13 +43,15 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
           };
         };
 
+        console.log(completedEvent);
+
         await prisma.user.update({
           where: {
             id: completedEvent.metadata.userId,
           },
           data: {
             credits: {
-              increment: 100,
+              increment: 3000,
             },
           },
         });

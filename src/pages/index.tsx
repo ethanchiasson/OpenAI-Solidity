@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center">
         {sessionData ? (
      <>
-     <div className="w-full mx-2 max-w-2xl p-4">
+     <div className="w-full mx-2 max-w-3xl p-4">
      <Generator/>
      </div>
      </>

@@ -35,6 +35,7 @@ const Profile: NextPage = () => {
               <div className="stat-title">{sessionData?.user.email}</div>
               <div className="stat-desc text-secondary">
                 {/* {credits.data} credits */}
+                {sessionData?.user.id}
               </div>
             </div>
             <div className="align-center stat">

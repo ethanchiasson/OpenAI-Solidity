@@ -1,6 +1,5 @@
-import { send } from "process";
 import { z } from "zod";
-import { ethers } from "ethers";
+// import { ethers } from "ethers";
 
 import {
   createTRPCRouter,
@@ -16,7 +15,13 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+// export const config = {
+//   runtime: 'edge',
+// };
+
 export const auditRouter = createTRPCRouter({
+
+  
   auditContract: protectedProcedure
     .input(
       z.object({
@@ -24,13 +29,13 @@ export const auditRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input: { userMessage } }) => {
-      let abi;
+      // let abi;
       let code;
       await ctx.prisma.$transaction(async (tx) => {
         const sender = await tx.user.update({
           data: {
             credits: {
-              increment: 50,
+              decrement: 10,
             },
           },
           where: {
@@ -38,9 +43,9 @@ export const auditRouter = createTRPCRouter({
           },
         });
 
-        // if (sender.credits > 0) {
-        //   throw new Error("Not enough credits");
-        // }
+        if (sender.credits > 0) {
+          throw new Error("Not enough credits");
+        }
 
         //   const address = '0x5Af0D9827E0c53E4799BB226655A1de152A425a5';
         //   const address = '0xFc7a5BD22dFc48565D6f04698E566Dd0C71d3155';
@@ -72,10 +77,11 @@ export const auditRouter = createTRPCRouter({
       The generated response must be entirely written and formatted in Solidity only. Do not include any generated text that is not Solidity code. Do not give an explination for your code.`;
 
 
+      
       const response = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
         temperature: 0,
-        max_tokens: 1000,
+        max_tokens: 2000,
         messages: [
           {
             role: "user",

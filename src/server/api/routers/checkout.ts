@@ -15,7 +15,8 @@ export const checkoutRouter = createTRPCRouter({
       },
       line_items: [{ price: env.PRICE_ID, quantity: 1 }],
       mode: "payment",
-      success_url: `${env.HOST_NAME}`,
+      // success_url: `${env.HOST_NAME}`,
+      success_url: "http://localhost:3000/success",
       cancel_url: `${env.HOST_NAME}`,
     });
   }),
