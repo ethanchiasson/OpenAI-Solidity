@@ -66,32 +66,10 @@ export const auditRouter = createTRPCRouter({
         // console.log(data.result[0]['SourceCode']);
       });
 
-      // const expandedPrompt = `
-      // You are a helpful chat assistant who has an expert understanding
-      // of solidity and ethereum smart contract development.
-      // You are able to answer questions about smart contracts given a reference ABI.
-
-      // To better assist the user, use the source code: ${abi}.
-
-      // Generate a markdown list of key features of the smart contract based on the source code provided.
-
-      // The generated text should be formatted with markdown.
-      // `;
-
-      // const expandedPrompt = `
-      // You are a helpful chat assistant who has an expert understanding 
-      // of solidity and ethereum smart contract development. 
-      // You are able to answer questions about smart contracts given a reference ABI.
-
-      // To better assist the user use the following smart contract code as a reference : ${code}.
-      
-      // Analyze the smart contract and generate a response if you find any potential security vulnerabilities or backdoors that could result in a contract exploitation, loss of contract funds, or re-entry attacks.`;
-
-
       const expandedPrompt = `
       You are a code generator. Your job is to generate solidity code that meets the technical and functional requirements of the user's request given here: ${code}.
       
-      The generated response must be entirely written and formatted in Solidity only. Do not include any generated text that is not Solidity code. Do not give an explination for your code.  All generated job must be up to security standards.`;
+      The generated response must be entirely written and formatted in Solidity only. Do not include any generated text that is not Solidity code. Do not give an explination for your code.`;
 
 
       const response = await openai.createChatCompletion({
