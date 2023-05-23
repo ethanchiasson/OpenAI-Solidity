@@ -20,6 +20,7 @@
     "@trpc/next": "^10.18.0",
     "@trpc/react-query": "^10.18.0",
     "@trpc/server": "^10.18.0",
+    "@uiw/codemirror-extensions-langs": "^4.20.2",
     "@uiw/codemirror-theme-dracula": "^4.19.16",
     "@uiw/react-codemirror": "^4.19.16",
     "@uiw/react-textarea-code-editor": "^2.1.1",

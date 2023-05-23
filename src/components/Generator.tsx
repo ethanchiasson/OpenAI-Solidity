@@ -6,7 +6,7 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import ReactCodeMirror from "@uiw/react-codemirror";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import { solidity } from "@replit/codemirror-lang-solidity";
-
+import { langs } from "@uiw/codemirror-extensions-langs";
 
 const Chatbox: React.FC = () => {
   const { data: sessionData } = useSession();
@@ -17,16 +17,21 @@ const Chatbox: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
 
+  const [audioSource, setAudioSource] = useState<File | undefined>(undefined);
+
   type Tab = {
     title: any;
   };
 
   const tabs = [
     {
-      title: "Create",
+      title: "🛝 Playground",
     },
     {
-      title: "Settings",
+      title: "🏁 Goals",
+    },
+    {
+      title: "⚙️ Settings",
     },
   ];
 
@@ -51,6 +56,11 @@ const Chatbox: React.FC = () => {
     setUserAllowanceInput(e);
   };
 
+  const handleAudio = (event: React.FormEvent) => {
+    const file = (event.target as HTMLInputElement).files
+    setAudioSource(file![0])
+  }
+
   const test = api.audit.auditContract.useMutation({
     onSuccess: (data) => {
       console.log(data);
@@ -62,6 +72,16 @@ const Chatbox: React.FC = () => {
     onError: (error) => {
       alert(error.message);
       setIsLoading(false);
+    },
+  });
+
+  const transcribe = api.transcribe.transcribe.useMutation({
+    onSuccess: (data) => {
+      console.log(data);
+      setResponse(data);
+    },
+    onError: (error) => {
+      alert(error.message);
     },
   });
 
@@ -80,9 +100,10 @@ const Chatbox: React.FC = () => {
         ))}
       </div>
 
-      {activeTab?.title == "Create" ? (
+      {activeTab?.title == "🛝 Playground" ? (
         <>
           <form
+          id="form1"
             className="w-500 rounded-md bg-base-100 p-5"
             onSubmit={(e) => {
               e.preventDefault();
@@ -97,7 +118,7 @@ const Chatbox: React.FC = () => {
             }}
           >
             <h1 className="mb-10 text-lg">
-              Give a description of a contract you want to build
+              Let me know what kind of query to run 👇
             </h1>
 
             <div className="justify-items w-full items-center">
@@ -109,25 +130,34 @@ const Chatbox: React.FC = () => {
           onChange={(value) => setPrompt(value)}
           extensions={[solidity]}
         /> */}
+           {success == true ? (
+              <ReactCodeMirror
+                value={response.toString().replace("```", "")}
+                height="300px"
+                width={"100%"}
+                theme={dracula}
+                // onChange={(value) => setPrompt(value)}
+                // extensions={[solidity]}
+                // extensions={[langs.javascript()]}
+              />
+            ) : (
+              ""
+            )}
               <div className="">
                 <textarea
                   // type="text"
-                  placeholder="Generate a MEV bot for Uniswap"
+                  placeholder="Select all users who have not bought an item in 3 months..."
                   className="textarea-bordered textarea textarea-lg w-full"
                   onChange={(e) => setPrompt(e.target.value)}
                 />
                 <button
-                  className={`btn my-4 w-full gap-2 rounded-md ${
+                  className={`btn-primary btn my-4 w-full gap-2 rounded-md ${
                     isLoading == true ? "loading" : ""
                   }`}
                   type="submit"
                 >
-                  <p>
-                    {isLoading == true
-                      ? "Generating Contract"
-                      : `Generate New Contract`}{" "}
-                  </p>
-                  {isLoading == true ? "" : <IoSend />}
+                  <p>{isLoading == true ? "Generating Query" : `Run Query`} </p>
+                  {isLoading == true ? <IoSparklesSharp /> : <IoSend />}
                   {/* <IoSend /> */}
                 </button>
                 {isLoading == true ? (
@@ -137,24 +167,13 @@ const Chatbox: React.FC = () => {
                 )}
               </div>
             </div>
-            {success == true ? (
-              <ReactCodeMirror
-                value={response.toString()}
-                height="500px"
-                width={"100%"}
-                theme={dracula}
-                // onChange={(value) => setPrompt(value)}
-                extensions={[solidity]}
-              />
-            ) : (
-              ""
-            )}
+         
           </form>
           <div className="m-2 flex flex-col items-center justify-center p-2">
             {/* <ReactMarkdown>{response && response}</ReactMarkdown> */}
           </div>
         </>
-      ) : activeTab?.title == "Settings" ? (
+      ) : activeTab?.title == "⚙️ Settings" ? (
         <div className="w-500 rounded-md bg-base-100 p-5">
           {/* <h1 className="mb-5 text-lg">Edit your settings here</h1> */}
           <div className="form-control">
@@ -179,7 +198,8 @@ const Chatbox: React.FC = () => {
             </label>
             <label className="label">
               <span className="label-text text-xs text-primary">
-                Using fewer tokens could result in less desireable results. Default is 1,000 tokens
+                Using fewer tokens could result in less desireable results.
+                Default is 1,000 tokens
               </span>
             </label>
           </div>
@@ -206,6 +226,27 @@ const Chatbox: React.FC = () => {
         <p>Audit</p>
       ) : (
         ""
+        // <form
+        // id="form2"
+        //   className="w-500 rounded-md bg-base-100 p-5"
+        //   onSubmit={(e) => {
+        //     e.preventDefault();
+        //     if (!audioSource) {
+        //       alert("please upload some audio");
+        //     } else {
+        //       transcribe.mutate(
+        //         audioSource,
+        //       );
+        //     }
+        //   }}
+        // >
+        //   <input onChange={(e) => (
+        //     handleAudio(e)
+        //   )} className="input" type="file"/>
+        //   {
+        //     audioSource && <button type="submit" form="form2">Transcribe</button>
+        //   }
+        // </form>
       )}
     </div>
   );

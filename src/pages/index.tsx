@@ -10,9 +10,6 @@ const Home: NextPage = () => {
   const { data: sessionData } = useSession();
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
-
- 
-
   return (
     <>
       <Head>
@@ -33,13 +30,12 @@ const Home: NextPage = () => {
           <div className="container flex flex-col py-16 ">
             <div className="flex flex-col items-center gap-2">
               <div className="flex flex-col items-center justify-center gap-4 text-center">
-                <h1 className="text-7xl">🧪</h1>
+                <h1 className="text-7xl"></h1>
                 <h1 className="text-4xl font-bold text-white">
-                 Generate Smart Contracts With Natural Language
+                You still write your own SQL 😹 🤡
                 </h1>
                 <p className="px-3 text-base-content">
-                  Leverage AI to construct more secure, optimized smart
-                  contracts and get an edge over attackers.
+                 Leverage AI to write SQL queries for your Database and save your fingers !
                 </p>
               </div>
             </div>

@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
           href={"/"}
           className="btn-ghost btn rounded-md text-xl normal-case"
         >
-          Pragma Lab 🧪
+          Lingo<span className="text-primary">.gg</span> 
         </Link>
       </div>
       {sessionData ? (

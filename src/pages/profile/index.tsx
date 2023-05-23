@@ -5,12 +5,14 @@ import { GetSessionParams, getSession, signIn, signOut, useSession } from "next-
 import { useState } from "react";
 import Image from "next/image";
 import { api } from "~/utils/api";
-import { IoSparklesSharp } from "react-icons/io5";
+import { IoAnalytics, IoFlash, IoLeaf, IoSparklesSharp, IoTrophy } from "react-icons/io5";
 
 const Profile: NextPage = () => {
   const { data: sessionData } = useSession();
 
   const credits = api.user.getCredits.useQuery(undefined, {});
+  const exp = api.user.getUserExp.useQuery(undefined, {});
+  const level = api.user.getUserLevel.useQuery(undefined, {});
 
   return (
     <>
@@ -38,17 +40,45 @@ const Profile: NextPage = () => {
                 {sessionData?.user.id}
               </div>
             </div>
-            <div className="align-center stat">
+            <div className="align-center stat ">
               <div className="stat-figure text-secondary">
-                <IoSparklesSharp size={32} />
+                <IoSparklesSharp size={25} />
               </div>
               <div className="stat-title">Credits</div>
               <div className="stat-value text-secondary"> {credits.data}</div>
               <div className="stat-desc"></div>
             </div>
+            <div className="align-center stat">
+              <div className="stat-figure text-secondary">
+                <IoAnalytics size={25} />
+              </div>
+              <div className="stat-title">Level</div>
+              <div className="stat-value text-secondary"> {level.data}</div>
+              <div className="stat-desc"></div>
+            </div>
+            <div className="align-center stat">
+              <div className="stat-figure text-secondary">
+                <IoFlash size={25} />
+              </div>
+              <div className="stat-title">Exp</div>
+              <div className="stat-value text-secondary"> {exp.data}</div>
+              <div className="stat-desc"></div>
+            </div>
+         
           </div>
-          <div className="mt-7">
+          
+          <div className="mt-7 w-full">
          {/*  */}
+         <div className="stats stats-vertical bg-base-300 shadow lg:stats-horizontal">
+         <div className="align-center stat">
+              <div className="stat-figure text-secondary">
+                <IoTrophy size={25} />
+              </div>
+              <div className="stat-title">Acheivements</div>
+              <div className="stat-value text-secondary"> {(exp.data!)/100}</div>
+              <div className="stat-desc"></div>
+            </div>
+         </div>
           </div>
         </div>
       </main>
@@ -56,21 +86,21 @@ const Profile: NextPage = () => {
   );
 };
 
-// export async function getServerSideProps(context: GetSessionParams) {
-//   const session = await getSession(context);
+export async function getServerSideProps(context: GetSessionParams) {
+  const session = await getSession(context);
 
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: true,
-//       },
-//     };
-//   }
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: true,
+      },
+    };
+  }
 
-//   return {
-//     props: { session },
-//   };
-// }
+  return {
+    props: { session },
+  };
+}
 
 export default Profile;
